@@ -1,17 +1,21 @@
 import { getJiraTickets } from "./getTickets.js";
+import { postToSlack } from "./postToSlack.js";
 
+let message = "";
 let previousJiraKeyList = [];
 
-export const isolateNewTickets = async () => {
 
+export const isolateNewTickets = async () => {
+    
     try {
-      const currentKeyList = Object.keys(
+        const currentKeyList = Object.keys(
             Object.groupBy(await getJiraTickets(), ({ key }) => key)
-          );
-      const newKeys = identifyNewTickets(previousJiraKeyList, currentKeyList);
-      if (newKeys.length > 0) {
-        console.log(`new tickets since last`);
-        newKeys.forEach((ticket) => console.log(`New ticket: ${ticket}`));
+            );
+            const newKeys = identifyNewTickets(previousJiraKeyList, currentKeyList);
+            if (newKeys.length > 0) {
+                console.log(`new tickets since last`);
+        newKeys.forEach((ticket) => message = `Ticket ${ticket} is now ready for review`);
+        postToSlack(message);
       } else {
         console.log(`No new tickets`);
       }

@@ -30,7 +30,7 @@ export async function getJiraTickets() {
 async function fetchJiraTickets() {
   try {
   //create JQL query to fetch tickets in the desired column
-  const jql = `project = "TX2" AND status = "Implementation Out" OR project = "TX2" AND status = "Code Review 1 Out"`;
+  const jql = `project = "TX2" AND status = "Implementation Out" OR project = "TX2" AND status = "Code Review 1 Out" OR project = "BTX" AND status = "Implementation Out" OR project = "BTX" AND status = "Code Review 1 Out"`;
 
     //make request to fetch jira tickets
     const issues = await client.issueSearch.searchForIssuesUsingJqlPost({jql});
