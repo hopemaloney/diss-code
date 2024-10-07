@@ -13,19 +13,20 @@ export const isolateNewTickets = async () => {
     if (newKeys.length > 0) {
       console.log(`new tickets since last`);
       newKeys.forEach(
-        (ticket) => (message = `Ticket ${ticket} is now ready for review`)
+        (ticket) => (message = `Ticket ${ticket} is now ready for review!`)
       );
       // postToSlack(message);
     } else {
       console.log(`No new tickets`);
     }
-    previousJiraKeyList = currentKeyList;
+    return previousJiraKeyList = currentKeyList;
   } catch (error) {
     console.error(`error fetching new ticket keys`, error);
+    return [];
   }
 };
 
-function identifyNewTickets(previousJiraKeyList, newJiraKeyList) {
+export function identifyNewTickets(previousJiraKeyList, newJiraKeyList) {
   return newJiraKeyList.filter(
     (ticket) => !previousJiraKeyList.includes(ticket)
   );

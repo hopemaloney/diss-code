@@ -2,7 +2,7 @@ import { getJiraTickets } from "./getTickets.js";
 import { postToSlack } from "./postToSlack.js";
 
 let message = "";
-const prefferedNotificationTime = "08:30";
+const prefferedNotificationTime = "09:00";
 
 export const sendDailySlackMessage = async () => {
   try {
